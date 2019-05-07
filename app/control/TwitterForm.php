@@ -19,14 +19,12 @@ class TwitterForm extends TPage
         $this->form->addFields([new TLabel('Titulo')], [$titulo]);
         $this->form->addFields([new TLabel('Texto')], [$texto]);
 
-        $titulo->setSize(300);
-        $texto->setSize(100, 150);
-
         $titulo->placeholder = 'Informe um titulo';
         $titulo->setTip('Aqui é a descrição do ditulo');
 
         $titulo->addValidation('Titulo', new TRequiredValidator); // required field
 
+        $titulo->setSize(300);
         $texto->setSize('100%', 50);
 
         $this->form->addAction('Salvar', new TAction(array($this, 'onSave')), 'fa:save green');
@@ -45,6 +43,7 @@ class TwitterForm extends TPage
         try {
 
             \Adianti\Database\TTransaction::open('example');
+
             $object = $this->form->getData('Twitter');
 
             $this->form->validate();
